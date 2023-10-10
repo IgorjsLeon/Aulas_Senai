@@ -7,7 +7,7 @@ while True:
     print("-                                       -")
     print("-----------------------------------------")
 
-    escolha_Exercicios = int(input("Digite qual exercício deseja acessar(1~...): "))
+    escolha_Exercicios = int(input("Digite qual exercício deseja acessar(1~3): "))
 
 #(Exercício 1)- Crie uma lista chamado "agenda" com dicíonarios de nome, telefone, e-mail e endereço
     
@@ -52,39 +52,47 @@ while True:
         print("- Exercício 3 -")
         print("---------------")
         agenda = []
+
         while True:
-            print("--------------------------")
+            print("\n--------------------------")
             print("- 1 - Adicionar Contatos -")
             print("- 2 - Verificar Contatos -")
             print("- 3 - Sair               -")
             print("--------------------------")
-            escolhas_Menu = int(input("Digite qual opção você deseja utilizar(1 ~ 3): "))
-            #----------------Adicionar Contato----------------
-            while (escolhas_Menu == 1):
+            
+            escolhas_Menu = int(input("Digite qual opção você deseja utilizar (1 ~ 3): "))
+            
+            while escolhas_Menu == 1:
                 agenda.append({"Nome": input("Digite o nome: "), "Telefone": int(input("Digite o telefone: "))})
-                voltar = input("Deseja voltar?(s/n): ")   
+                voltar = input("Deseja voltar ao menu? (s/n): ")
                 if voltar != "n":
                     break
-            #----------------Verificar Contato----------------
-            while (escolhas_Menu == 2):
-                print("-----------------------------------------------------")
+            
+            if escolhas_Menu == 2:
+                print("\n-----------------------------------------------------")
                 print("- 1 - Ver todos os Contatos                         -")
                 print("- 2 - Verificar Nome do Contato através do telefone -")
                 print("- 3 - Verificar Telefone do Contato através do nome -")
                 print("-----------------------------------------------------")
-                escolhas_Menu = int(input("Digite qual opção você deseja utilizar(1 ~ 3): "))
-            #----------------Ver todos os Contato----------------
-                if (escolhas_Menu == 1):
-                    for i in agenda:
-                        print(i, "\n")
-            #----------------Verificar Nome através do Telefone---------------- (Buscar o indice da lista, em seguida buscar o dicionario e depois buscar o input do usuario)
-                elif (escolhas_Menu == 2):
-                    for i in agenda:
-
-            #----------------Verificar Telefone através do Nome----------------
-                elif (escolhas_Menu == 3):
-                    agenda["Nome"]= input("Digite o telefone da pessoa que deseja saber o nome: ")
-
-            #----------------Sair do Programa----------------
-            if (escolhas_Menu == 3):
+                
+                escolhas_Menu = int(input("Digite qual opção você deseja utilizar (1 ~ 3): "))
+                
+                if escolhas_Menu == 1:
+                    for contato in agenda:
+                        print("Nome:", contato["Nome"])
+                        print("Telefone:", contato["Telefone"])
+                
+                elif escolhas_Menu == 2:
+                    telefone = int(input("\nDigite o telefone do contato que deseja encontrar: "))
+                    for contato in agenda:
+                        if contato["Telefone"] == telefone:
+                            print("Nome do Contato:", contato["Nome"])
+                
+                elif escolhas_Menu == 3:
+                    nome = input("\nDigite o nome do contato que deseja encontrar: ")
+                    for contato in agenda:
+                        if contato["Nome"] == nome:
+                            print("Telefone do Contato:", contato["Telefone"])
+            
+            elif escolhas_Menu == 3:
                 break
