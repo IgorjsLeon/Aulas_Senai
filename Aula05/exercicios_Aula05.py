@@ -50,14 +50,14 @@ elif escolha_Exer == 2: #Escolha do exercicio
 #(Exercicio 3) - Crie um programa que simule uma lista de tarefas. Crie um menu que insira, exclua, ordene tarefas nesta lista e conte a quantidade de tarefas.
 
 elif escolha_Exer == 3: #Escolha do exercicio
-    menu = True #Habilita o menu.
-    lista_Tarefas = [] #Cria a lista de tarefas que o usuario irá preencher.
-    while menu == True:
+    menu = True  # Habilita o menu.
+    lista_Tarefas = []  # Cria a lista de tarefas que o usuário irá preencher.
+
+    while menu:
         print("#############################################")
         print("#                                           #")
         print("# Bem-vindo(a) Lista de tarefas em Python   #")
         print("#               By: Igor Leon               #")
-        print("#                                           #")
         print("#                                           #")
         print("# Opção 01 - Adicionar elementos na lista   #")
         print("# Opção 02 - Exclua elementos da lista      #")
@@ -65,41 +65,44 @@ elif escolha_Exer == 3: #Escolha do exercicio
         print("# Opção 04 - Sair do programa               #")
         print("#                                           #")
         print("#############################################\n")
-        opcao = input("Digite qual opção deseja realizar(1~4): ")
-            
-        #----------Adicionar elementos na lista----------
-            
+        
+        opcao = input("Digite qual opção deseja realizar (1~4): ")
+        
         if opcao == "1":
             while True:
                 print(lista_Tarefas)
-                tarefa = input("\nDigite a tarefa: ") #Cria a variavel da tarefa do usuario.
-                lista_Tarefas.append(tarefa) #Inseri a tarefa dentro da lista.
-                voltar_ao_Menu = input("Deseja voltar ao menu?(s / n): ")
+                tarefa = input("\nDigite a tarefa: ")
+                lista_Tarefas.append(tarefa)
+                voltar_ao_Menu = input("Deseja voltar ao menu? (s / n): ")
                 if voltar_ao_Menu != "n":
-                    break                        
-
-        #----------Excluir elementos na lista (Preciso arrumar pois esta dando erro)----------
+                    break
 
         elif opcao == "2":
-            for ver_Tarefas in lista_Tarefas:
-                print(ver_Tarefas)
-            excluir = input("Qual tareda deseja excluir: ")
-            del lista_Tarefas[excluir]
-
-        #----------------Ver lista-------------
-
+            for index, ver_Tarefas in enumerate(lista_Tarefas):
+                print(f"{index}: {ver_Tarefas}")
+            excluir = input("Qual tarefa deseja excluir: ")
+            try:
+                index = int(excluir)
+                if 0 <= index < len(lista_Tarefas):
+                    del lista_Tarefas[index]
+                else:
+                    print("Índice inválido.")
+            except ValueError:
+                print("Por favor, insira um número válido.")
+            
         elif opcao == "3":
             while True:
-                print(lista_Tarefas)
-                voltar_ao_Menu = input("Deseja voltar ao menu?(s / n): ")
+                for tarefa in lista_Tarefas:
+                    print(tarefa)
+                voltar_ao_Menu = input("Deseja voltar ao menu? (s / n): ")
                 if voltar_ao_Menu != "n":
-                    break                        
-        
-        #----------------Sair do programa--------------
-
+                    break
         elif opcao == "4":
-            print("obrigado por utilizar o programa")
+            print("Obrigado por utilizar o programa")
             menu = False
+        else:
+            print("Opção inválida. Por favor, escolha uma opção de 1 a 4.")
+
 
 
 #(Exercicio 4) - Crie um programa que o usuario digite valores e depois tire a média da lista. (Preciso terminar)
