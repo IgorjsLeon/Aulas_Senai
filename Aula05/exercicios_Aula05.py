@@ -105,7 +105,7 @@ elif escolha_Exer == 3: #Escolha do exercicio
 
 
 
-#(Exercicio 4) - Crie um programa que o usuario digite valores e depois tire a média da lista. (Preciso terminar)
+#(Exercicio 4) - Crie um programa que o usuario digite valores e depois tire a média da lista.
 
 elif escolha_Exer == 4: #Escolha do exercicio
     numero_Usuario = []
