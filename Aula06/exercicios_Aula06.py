@@ -45,7 +45,7 @@ while True:
         if (retorno_Menu != "s"):
             break
 
-#(Exercício 3)- Crie uma lista chamado "agenda" com dicíonarios de nome e telefone, sendo que o usuario escolhe entre add contatos e verificar os dicionarios. (Preciso terminar)
+#(Exercício 3)- Crie uma lista chamado "agenda" com dicíonarios de nome e telefone, sendo que o usuario escolhe entre add contatos e verificar os dicionarios.
 
     elif (escolha_Exercicios == 3):
         print("---------------")
