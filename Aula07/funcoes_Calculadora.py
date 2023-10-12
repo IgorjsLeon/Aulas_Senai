@@ -25,7 +25,7 @@ def mult(num1, num2):
 def div(num1, num2):
     return (num1 / num2)
 
-"""menu_Calculadora()
+menu_Calculadora()
 
 opcao_Menu = int(input("Digite a opção desejada: "))
 if opcao_Menu == 1:
@@ -44,7 +44,7 @@ elif opcao_Menu == 4:
     num1 = int(input("numero 1: "))
     num2 = int(input("numero 2: "))
     print(div(num1,num2))
-    """
+    
 
 #Inserir, ler, atualizar e excluir um item no estoque.
 """creat = inserir ou criar                                                         
@@ -53,24 +53,3 @@ update = atualizar
 delete = excluir
 estoque ["chave"] = valor
 """
-estoque = {}
-def menu_Estoque():
-        print("--------------------")
-        print("-      Estoque     -")
-        print("-                  -")
-        print("-   1- Inserir     -")
-        print("-   2- Ler         -")
-        print("-   3- Atualizar   -")
-        print("-   4- Excluir     -")
-        print("-                  -")
-        print("--------------------")
-             
-def inserir_Estoque(codigo, nome, quantidade):
-    if codigo not in estoque:
-        estoque[codigo] = {"nome": nome, "quantidade": quantidade}
-    else:
-        print("O item já existe no estoque.")
-
-def ler_Estoque():
-    for i in estoque:
-        print(estoque[i])
