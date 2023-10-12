@@ -1,15 +1,33 @@
-#Crie uma calculadora com todas as operações basicas usando as funções.
-from calculadora import menu_Estoque
-from calculadora import inserir_Estoque
-from calculadora import ler_Estoque
+#----------Importando as funções no arquivo calculadora.py--------------
+from funcoes_Calculadora import menu_Calculadora
+from funcoes_Calculadora import soma
+from funcoes_Calculadora import sub
+from funcoes_Calculadora import mult
+from funcoes_Calculadora import div
+
+#----------Criando o Programa da Calculadora--------------
+
 while True:
-    menu_Estoque()
-    opcao = int(input("Digite a opção desejada: "))
-    if opcao == 1:
-        codigo = int(input("Digite o código do produto: "))
-        nome = input("Digite o produto: ")
-        quantidade = int(input("Digite a quantidade: "))
-        inserir_Estoque(codigo, nome, quantidade)
-        
-    elif opcao == 2:
-        ler_Estoque()
+    menu_Calculadora()
+    
+    opcao_Menu = int(input("Digite a opção desejada: "))
+
+    if opcao_Menu == 1:
+        num1 = float(input("Digite o primeiro valor: "))
+        num2 = float(input("Digite o segundo valor: "))
+        print(f"Resultado: {soma(num1, num2)}")
+    elif opcao_Menu == 2:
+        num1 = float(input("Digite o primeiro valor: "))
+        num2 = float(input("Digite o segundo valor: "))
+        sub(num1, num2)
+        print(f"Resultado: {sub(num1, num2)}")
+    elif opcao_Menu == 3:
+        num1 = float(input("Digite o primeiro valor: "))
+        num2 = float(input("Digite o segundo valor: "))
+        mult(num1, num2)
+        print(f"Resultado: {mult(num1, num2)}")
+    elif opcao_Menu == 4:
+        num1 = float(input("Digite o primeiro valor: "))
+        num2 = float(input("Digite o segundo valor: "))
+        div(num1, num2)
+        print(f"Resultado: {div(num1, num2)}")
