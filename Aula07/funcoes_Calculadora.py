@@ -25,27 +25,6 @@ def mult(num1, num2):
 def div(num1, num2):
     return (num1 / num2)
 
-menu_Calculadora()
-
-opcao_Menu = int(input("Digite a opção desejada: "))
-if opcao_Menu == 1:
-    num1 = int(input("numero 1: "))
-    num2 = int(input("numero 2: "))
-    print(soma(num1,num2))
-elif opcao_Menu == 2:
-    num1 = int(input("numero 1: "))
-    num2 = int(input("numero 2: "))
-    print(sub(num1,num2))
-elif opcao_Menu == 3:
-    num1 = int(input("numero 1: "))
-    num2 = int(input("numero 2: "))
-    print(mult(num1,num2))
-elif opcao_Menu == 4:
-    num1 = int(input("numero 1: "))
-    num2 = int(input("numero 2: "))
-    print(div(num1,num2))
-    
-
 #Inserir, ler, atualizar e excluir um item no estoque.
 """creat = inserir ou criar                                                         
 read = ler
