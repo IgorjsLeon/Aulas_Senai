@@ -6,7 +6,7 @@ estoque = {}
 
 def menu_Estoque():
     print("\n--------------------------")
-    print("-   Estoque  em Python   -")
+    print("-   Estoque em Python   -")
     print("-     by: Igor Leon      -")
     print("-                        -")
     print("-   1 - Inserir Produto  -")
