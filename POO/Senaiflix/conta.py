@@ -1,4 +1,4 @@
-class Banco:
+class Conta:
     def __init__(self, nome, conta, agencia):
         self.nome = nome
         self.conta = conta
