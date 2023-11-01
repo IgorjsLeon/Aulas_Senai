@@ -8,25 +8,26 @@ class Funcionario:
 
 class CLT(Funcionario):
     def add_CLT(self, nome, salariobase):
-        funcionarioCLT = [{'CLT': 'sim','Nome': nome, 'Salário': salariobase}]
+        funcionarioCLT = [{'Cargo': 'CLT','Nome': nome, 'Salário': salariobase}]
         funcionarios.append(funcionarioCLT)
         return 'Funcionario CLT cadastrado com sucesso', funcionarios
 
     def calcular_salario(self):
-        return 'salario clt'
+        return f'O salario do funcionario CLT é {salariobase}.'
     
 class Comissionado(Funcionario):
     def add_Comissionado(self, nome, salariobase= None):
-        funcionarioComissionado = [{'Comissionado': 'sim', 'Nome': nome, 'Salário': salariobase}]
+        funcionarioComissionado = [{'Cargo': 'Comissionado', 'Nome': nome, 'Salário': vendas*0.02}]
         funcionarios.append(funcionarioComissionado)
         return 'Funcionario Comissionado cadastrado com sucesso', funcionarios
 
-    def calcular_salario(self):
-        return 'salario comissionado'
+    def calcular_salario(self, vendas):
+        salComis = vendas * 0.02
+        return f'O salario do funcionario comissionado é: {salComis}.'
     
 class Estagiario(Funcionario):
     def add_Estagiario(self, nome, salariobase):
-        funcioarioEstagiario = [{'Estagiario': 'sim','Nome': nome, 'Salário': salariobase/2}]
+        funcioarioEstagiario = [{'Cargo': 'Estagiario','Nome': nome, 'Salário': salariobase/2}]
         funcionarios.append(funcioarioEstagiario)
         return 'Funcionario Estagiario cadastrado com sucesso', funcionarios
     
@@ -47,9 +48,10 @@ if opcao == '3':
     print(estagiario.calcular_salario(salariobase))
     print(funcionarios)
 elif opcao == '2':
+    vendas = float(input("Digite o valor das vendas do funcionario comissionado: "))
     comissionado = Comissionado(nome, salariobase)
     comissionado.add_Comissionado(nome, salariobase)
-    print(comissionado.calcular_salario())
+    print(comissionado.calcular_salario(vendas))
     print(funcionarios)
 elif opcao == '1':
     clt = CLT(nome, salariobase)
