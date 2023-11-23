@@ -1,0 +1,37 @@
+body{
+    background-color: aquamarine;
+}
+
+nav{
+    background-color: gray;
+}
+
+li{
+    display: inline-block;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+}
+
+
+
+h1{
+background-color: blueviolet;
+color: white;
+width: 100%;
+}
+
+p{
+    color: red;
+    font-size: 30px;
+    font-family: tahoma;
+    font-weight: bold;
+}
+
+#p.principal{
+    color: blue;
+    font-size: 35px;
+    font-family: tahoma;
+    font-weight: bold;
+}

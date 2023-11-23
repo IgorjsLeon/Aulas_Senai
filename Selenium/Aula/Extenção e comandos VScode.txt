@@ -1,0 +1,2 @@
+instalar extenção Live Server
+iniciar o arquivo html com HTML:5
