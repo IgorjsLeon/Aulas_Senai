@@ -29,7 +29,7 @@ def pesquisar_no_mercado_livre():
             nome_produto = resultado.find('h2', class_='ui-search-item__title').text
 
             # Procurar pelo elemento de preço correto
-            preco_produto_element = resultado.find('spam', class_='price-tag-fraction')
+            preco_produto_element = resultado.find('span', class_='price-tag-fraction')
             preco_produto = preco_produto_element.text if preco_produto_element else 'Preço não disponível'
 
             link_produto = resultado.find('a', class_='ui-search-link')['href']
