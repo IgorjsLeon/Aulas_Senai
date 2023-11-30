@@ -1,0 +1,33 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+# Instanciar o navegador (Chrome neste exemplo)
+driver = webdriver.Chrome()
+
+try:
+    # Navegar para uma URL
+    driver.get("https://www.exemplo.com")
+
+    # Encontrar um elemento pelo ID usando a classe By
+    element_by_id = driver.find_element(By.ID, "id_do_elemento")
+    element_by_id.click()
+
+    # Encontrar um elemento pelo nome da classe usando a classe By
+    element_by_class = driver.find_element(By.CLASS_NAME, "nome_da_classe")
+    element_by_class.click()
+
+    # Encontrar um elemento pelo link de texto usando a classe By
+    element_by_link_text = driver.find_element(By.LINK_TEXT, "Texto do Link")
+    element_by_link_text.click()
+
+    # Encontrar um elemento pelo seletor CSS usando a classe By
+    element_by_css = driver.find_element(By.CSS_SELECTOR, "seletor_css")
+    element_by_css.click()
+
+    # Encontrar um elemento pelo caminho XPath usando a classe By
+    element_by_xpath = driver.find_element(By.XPATH, "caminho_xpath")
+    element_by_xpath.click()
+
+finally:
+    # Fechar o navegador, independentemente de o login ter sido bem-sucedido ou não
+    driver.quit()

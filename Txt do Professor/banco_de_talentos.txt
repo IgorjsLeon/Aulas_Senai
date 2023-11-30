@@ -1,0 +1,28 @@
+Crie um sistema para adicionar curriculuns
+Crie um banco de dados chamado "Banco de Talentos"
+
+Este sistema deverá ter as tabelas
+
+candidato
+nome, email, cpf, linkdl, github
+
+
+formacao
+
+escolaridade
+instituição
+curso
+duracao
+
+experiencia profissional
+
+empresa
+cargo
+tempo
+
+Opções
+
+Incluir candidato
+Atualizar dados do candidato
+Deletar Cadastro
+Listar Candidatos

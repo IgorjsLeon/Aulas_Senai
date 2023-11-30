@@ -1,0 +1,48 @@
+# Importar a biblioteca Selenium
+from selenium import webdriver
+
+# Instanciar um navegador (Chrome, neste exemplo)
+driver = webdriver.Chrome()
+
+# Navegar para uma URL
+driver.get("https://www.exemplo.com")
+
+# Encontrar um elemento pelo ID
+element = driver.find_element_by_id("id_do_elemento")
+
+# Encontrar um elemento pelo nome da classe
+element = driver.find_element_by_class_name("nome_da_classe")
+
+# Encontrar um elemento pelo nome da tag
+element = driver.find_element_by_tag_name("nome_da_tag")
+
+# Encontrar um elemento pelo seletor CSS
+element = driver.find_element_by_css_selector("seletor_css")
+
+# Encontrar um elemento pelo caminho XPath
+element = driver.find_element_by_xpath("caminho_xpath")
+
+# Encontrar um elemento pelo link de texto
+element = driver.find_element_by_link_text("Texto do Link")
+
+# Encontrar um elemento pelo texto parcial do link
+element = driver.find_element_by_partial_link_text("Parte do Texto do Link")
+
+# Encontrar um elemento pelo atributo de nome
+element = driver.find_element_by_name("nome_do_elemento")
+
+# Encontrar um elemento pelo atributo de valor
+element = driver.find_element_by_value("valor_do_elemento")
+
+# Enviar texto para um campo de entrada (input)
+element.send_keys("Texto a ser digitado")
+
+# Clicar em um botão
+element.click()
+
+# Esperar por um determinado tempo (em segundos)
+import time
+time.sleep(5)  # Espera por 5 segundos
+
+# Fechar o navegador
+driver.quit()

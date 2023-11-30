@@ -1,0 +1,39 @@
+import pyautogui
+import time
+
+# Aguarde alguns segundos antes de iniciar
+time.sleep(5)
+
+# Obtenha e imprima as dimensões da tela
+largura, altura = pyautogui.size()
+print(f"A largura da tela é {largura}, e a altura é {altura}")
+
+# Mova o mouse para as coordenadas (x, y) e clique
+pyautogui.moveTo(100, 100, duration=1)
+pyautogui.click()
+
+# Digite algo usando o teclado virtual
+pyautogui.typewrite("Hello, World!")
+
+# Capture uma captura de tela
+screenshot = pyautogui.screenshot()
+screenshot.save("screenshot.png")
+
+# Exemplo de clique com múltiplos cliques e intervalo entre cliques
+pyautogui.click(200, 200, clicks=2, interval=0.5, button='left')
+
+# Exemplo de pressionar uma tecla
+pyautogui.press('enter')
+
+# Exemplo de pressionar simultaneamente múltiplas teclas
+pyautogui.hotkey('ctrl', 'c')
+
+# Rola a tela para cima
+pyautogui.scroll(10)
+
+# Exibe um alerta
+pyautogui.alert('Este é um alerta!')
+
+# Obtém e imprime a posição atual do cursor do mouse
+x, y = pyautogui.position()
+print(f"A posição atual do mouse é x={x}, y={y}")

@@ -1,0 +1,60 @@
+import sqlite3
+
+# Conectar ao banco de dados (ou criar o arquivo se não existir)
+conn = sqlite3.connect('loja_ii.db')
+cursor = conn.cursor()
+
+# Criar a tabela clientes se ela não existir
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS clientes (
+        idclientes INTEGER PRIMARY KEY,
+        nome TEXT,
+        endereco TEXT,
+        telefone TEXT,
+        email TEXT,
+        cpf TEXT
+    )
+''')
+conn.commit()
+
+# Função para inserir um novo cliente
+def inserir_cliente(nome, endereco, telefone, email, cpf):
+    cursor.execute('INSERT INTO clientes (nome, endereco, telefone, email, cpf) VALUES (?, ?, ?, ?, ?)',
+                   (nome, endereco, telefone, email, cpf))
+    conn.commit()
+
+# Função para listar todos os clientes
+def listar_clientes():
+    cursor.execute('SELECT * FROM clientes')
+    clientes = cursor.fetchall()
+    for cliente in clientes:
+        print(cliente)
+
+# Função para atualizar um cliente pelo ID
+def atualizar_cliente(idclientes, nome, endereco, telefone, email, cpf):
+    cursor.execute('''
+        UPDATE clientes
+        SET nome = ?, endereco = ?, telefone = ?, email = ?, cpf = ?
+        WHERE idclientes = ?
+    ''', (nome, endereco, telefone, email, cpf, idclientes))
+    conn.commit()
+
+# Função para deletar um cliente pelo ID
+def deletar_cliente(idclientes):
+    cursor.execute('DELETE FROM clientes WHERE idclientes = ?', (idclientes,))
+    conn.commit()
+
+# Exemplo de uso
+inserir_cliente('João', 'Rua A, 123', '123456789', 'joao@email.com', '123.456.789-01')
+inserir_cliente('Maria', 'Rua B, 456', '987654321', 'maria@email.com', '987.654.321-02')
+
+listar_clientes()
+
+atualizar_cliente(1, 'João Silva', 'Rua A, 123', '987654321', 'joao.silva@email.com', '123.456.789-01')
+
+deletar_cliente(2)
+
+listar_clientes()
+
+# Fechar a conexão com o banco de dados
+conn.close()
