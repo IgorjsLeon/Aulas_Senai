@@ -45,7 +45,7 @@ if response.status_code == 200:
     #Navegar pela arvore DOM, navegar pelo HTML para encontrar elementos alinhados
 
     conteudo_div = soup.find('div', class_='ui-pdp-header__title-container')
-    conteudo_spam = soup.find('spam', class_='andes-visually-hidden')
+    conteudo_spam = soup.find('span', class_='andes-visually-hidden')
     print(conteudo_div)
 
     #Exibir o texto dentro da TAG <div class= 'conteudo'>
