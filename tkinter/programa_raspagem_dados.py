@@ -1,71 +1,105 @@
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
-from pratica01 import pesquisar_no_mercado_livre
-import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
+from operator import itemgetter
+from time import sleep
+import pandas as pd
+import matplotlib.pyplot as plt
+import time  
 
-
-
+# Declare global variable
+preco = 0.0
+lista_produtos = []
 
 def pesquisar_no_mercado_livre():
-    # Solicitar uma pesquisa do usuário
-    produto_pesquisa = entrada_txt.get()
+    global preco
+    global lista_produtos 
 
-    # Substituir os espaços por '+' para formatar corretamente a URL
-    produto_pesquisa = produto_pesquisa.replace(' ', '+')
+    navegador = webdriver.Chrome()
 
-    # URL de pesquisa do Mercado Livre
-    url = f'https://lista.mercadolivre.com.br/{produto_pesquisa}'
+    navegador.get('https://www.mercadolivre.com.br/')
 
-    # Enviar uma solicitação GET para a página de pesquisa
-    response = requests.get(url)
+    sleep(2)
 
-    # Verificar se a solicitação foi bem-sucedida (código status 200)
-    if response.status_code == 200:
-        # Criar um objeto BeautifulSoup para analisar o conteúdo da página de pesquisa
-        soup = BeautifulSoup(response.text, 'html.parser')
+    pesquisa = entrada_txt.get()
 
-        print(soup.text)
+    input_place = navegador.find_element(By.TAG_NAME, "input")
+    input_place.send_keys(pesquisa)
+    input_place.submit()
 
-        # Encontrar todos os elementos HTML correspondentes à pesquisa
-        resultados = soup.find_all('li', class_='ui-search-layout__item')
+    page_content = navegador.page_source
+    time.sleep(2)  # Add this line to give the page time to load
+    site = BeautifulSoup(page_content, 'html.parser')
 
-        # Exibir informações sobre os primeiros resultados
-        for resultado in resultados[:5]:  # Exibe os 5 primeiros resultados
-            nome_produto = resultado.find('h2', class_='ui-search-item__title').text
+    flag_pagina_seguinte = True
 
-            # Procurar pelo elemento de preço correto
-   
-            preco_produto_element = resultado.find(By.XPATH, '//*[@id=":R1h59b9:"]/div[2]/div[1]/div[2]/div/div/div/span[1]')
-            preco = preco_produto_element.text if preco_produto_element else 'Preço não disponível'
+    while flag_pagina_seguinte == True:
+        produtos = site.findAll('div', attrs={'class': 'ui-search-result'})
 
-            link_produto = resultado.find('a', class_='ui-search-link')['href']
+        for produto in produtos:
+            h_ref = produto.find('a')
+            preco = produto.find('span', attrs={'aria-roledescription': 'Preço'}).contents[1].text
+            preco = preco.replace('.', '')
+            preco = preco.replace(',', '.')
+            preco = float(preco)
 
-            print(f'Produto: {nome_produto}')
-            print(f'Preço: {preco}')
-            print(f'Link: {link_produto}')
-            print('-' * 30)
-    else:
-        print(f"A solicitação falhou. Status: {response.status_code}")
+            lista_produtos.append([h_ref['title'], "{:.2f}".format(preco), h_ref['href'], preco])
+        try:
+            btn_seguinte = navegador.find_element(By.XPATH, value="//a[@title='Seguinte']")
+            navegador.execute_script("arguments[0].click();", btn_seguinte)
+            sleep(3)
+        except:
+            flag_pagina_seguinte = False
+            pass
+
+    lista_ordenada = sorted(lista_produtos, key=itemgetter(3))
+
+    for item in lista_ordenada:
+        del item[3]
+
+    arq_produtos = pd.DataFrame(lista_ordenada, columns=['Título', 'Preço', 'Link'])
+    arq_produtos.to_excel(f'{pesquisa}.xlsx', index=False)
+
+def graficos():
+    df_dados = pd.DataFrame(lista_produtos, columns=['Título', 'Preço', 'Link'])
+    df_dados['Valor'] = df_dados['Preço'].apply(lambda x: float(x.replace(',', '.')))
+    media_preco = df_dados['Valor'].mean()
+    
+    # Cria uma figura e eixo separadamente
+    fig, ax = plt.subplots()
+    
+    # Usa barh diretamente no eixo para ter controle sobre as configurações
+    bars = ax.barh([entrada_txt.get()], [media_preco])
+    
+    # Define o título e rótulos dos eixos
+    plt.title(f'Valor médio de {entrada_txt.get()}')
+    plt.xlabel('Valor')
+    plt.ylabel('Nome Produto')
+    
+    # Adiciona o texto da média nas barras
+    for bar in bars:
+        ax.text(bar.get_width(), bar.get_y() + bar.get_height()/2, f'Média: {media_preco:.2f}', 
+                va='center', color='red')
+    
+    plt.show()
 
 
 janela = tk.Tk()
 janela.geometry("500x500+800+200")
 
-
-#Cria o label usuario:
 label = tk.Label(janela, text='Produto')
 label.pack()
 
-#Criar uma area para inserir texto
 entrada_txt = tk.Entry(janela, width=10)
 entrada_txt.pack()
 
-#Button Botão:
-botao = tk.Button(janela, text='Procurar', command= pesquisar_no_mercado_livre)
+botao = tk.Button(janela, text='Procurar', command=pesquisar_no_mercado_livre)
 botao.pack()
+
+botao_dados = tk.Button(janela, text='Dados', command=graficos)
+botao_dados.pack()
 
 janela.mainloop()
